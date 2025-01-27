@@ -7,7 +7,7 @@ import TopNavbar from './components/TopNavbar';
 // This array holds information about different videos
 const videoUrls = [
   {
-    url: require('./videos/food1.mp4'),
+    url: require('./videos/food.1.mp4'),
    // profilePic: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/9d429ac49d6d18de6ebd2a3fb1f39269~c5_100x100.jpeg?x-expires=1688479200&x-signature=pjH5pwSS8Sg1dJqbB1GdCLXH6ew%3D',
     username: 'restaurant 1 ',
     description: 'Lol nvm #compsci #chatgpt #ai #openai #techtok',
