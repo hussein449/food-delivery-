@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faUserFriends, faPlus, faInbox, fa7,faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faUtensils, faPlus, faInbox, fa7,faUser } from '@fortawesome/free-solid-svg-icons';
 
 function BottomNavbar() {
   return (
@@ -10,8 +10,9 @@ function BottomNavbar() {
           <span className="item-name active">Home</span>
         </div>
         <div className="nav-item">
-          <FontAwesomeIcon icon={faUserFriends} className="icon" />
-          <span className="item-name">Friends</span>
+          <FontAwesomeIcon icon={faUtensils} className="icon" />
+          <span className="item-name">Restaurants</span>
+          
         </div>
         <div className="nav-item">
           <FontAwesomeIcon icon={faPlus} className="icon plus" />

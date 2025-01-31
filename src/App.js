@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import VideoCard from './components/VideoCard';
 import BottomNavbar from './components/BottomNavbar';
-import TopNavbar from './components/TopNavbar';
 
 // This array holds information about different videos
 const videoUrls = [
@@ -101,7 +100,7 @@ function App() {
   return (
     <div className="app">
       <div className="container">
-        <TopNavbar className="top-navbar" />
+      
         {/* Here we map over the videos array and create VideoCard components */}
         {videos.map((video, index) => (
           <VideoCard
