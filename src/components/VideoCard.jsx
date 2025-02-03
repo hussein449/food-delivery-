@@ -6,7 +6,7 @@ import './VideoCard.css';
 const VideoCard = (props) => {
   const { url, username, description, song, likes, shares, comments, saves, profilePic, setVideoRef, autoplay } = props;
   const videoRef = useRef(null);
-
+  
   useEffect(() => {
     if (autoplay) {
       videoRef.current.play();

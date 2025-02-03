@@ -2,13 +2,16 @@ import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import VideoCard from './components/VideoCard';
 import BottomNavbar from './components/BottomNavbar';
+import TopNavbar from './components/TopNavbar';
+import { Routes, Route } from 'react-router-dom';
+import Categories from './Categories';
 
 // This array holds information about different videos
 const videoUrls = [
   {
     url: require('./videos/food.1.mp4'),
-   // profilePic: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/9d429ac49d6d18de6ebd2a3fb1f39269~c5_100x100.jpeg?x-expires=1688479200&x-signature=pjH5pwSS8Sg1dJqbB1GdCLXH6ew%3D',
-    username: 'restaurant 1 ',
+    profilePic: 'https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/9d429ac49d6d18de6ebd2a3fb1f39269~c5_100x100.jpeg?x-expires=1688479200&x-signature=pjH5pwSS8Sg1dJqbB1GdCLXH6ew%3D',
+    username: 'csjackie',
     description: 'Lol nvm #compsci #chatgpt #ai #openai #techtok',
     song: 'Original sound - Famed Flames',
     likes: 430,
@@ -52,6 +55,7 @@ const videoUrls = [
 ];
 
 function App() {
+ 
   const [videos, setVideos] = useState([]);
   const videoRefs = useRef([]);
 
@@ -99,8 +103,12 @@ function App() {
 
   return (
     <div className="app">
+      <Routes>
+        <Route path="/" element={<div>Home Page Content</div>} />
+        <Route path="/categories" element={<Categories />} />
+      </Routes>
       <div className="container">
-      
+        <TopNavbar className="top-navbar" />
         {/* Here we map over the videos array and create VideoCard components */}
         {videos.map((video, index) => (
           <VideoCard
@@ -116,6 +124,7 @@ function App() {
             profilePic={video.profilePic}
             setVideoRef={handleVideoRef(index)}
             autoplay={index === 0}
+            
           />
         ))}
         <BottomNavbar className="bottom-navbar" />

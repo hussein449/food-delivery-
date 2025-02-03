@@ -1,26 +1,47 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faCircleCheck, faHeart, faBookmark, faCartShopping, faInfoCircle ,faTimes} from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faCircleCheck, faHeart, faPlus, faCartShopping, faInfoCircle, faTimes} from '@fortawesome/free-solid-svg-icons';
 import './FooterRight.css';
 
-function FooterRight({ likes, saves, profilePic }) {
+function FooterRight({ likes,  profilePic, productDescription }) {
   const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [userAddIcon, setUserAddIcon] = useState(faCirclePlus);
+  const [plusIcon, setPlusIcon] = useState(faCirclePlus);
   const [showInfoPage, setShowInfoPage] = useState(false);
   const [showCartPage, setCartPage] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+ 
+
   const handleUserAddClick = () => {
-    setUserAddIcon(faCircleCheck);
+    setPlusIcon(faCircleCheck);
     setTimeout(() => {
-      setUserAddIcon(null);
+      setPlusIcon(faCirclePlus);
     }, 3000);
   };
-  function CartPage() {
-    return (
-      <div style={{
+
+  // const HandleAdding = () => {
+  //   if (productDescription) {
+  //     console.log("Product Description:", productDescription);
+  //   } else {
+  //     console.log("No description available.");
+  //   }
+  // }
+  const handleAddToCart = () => {
+    if (productDescription) {
+      setCartItems((prevItems) => [...prevItems, productDescription]);
+    }
+    setCartPage(true);
+  };
+
+  const handleCloseCart = () => {
+    setCartPage(false);
+  };
+
+  const CartPage = () => (
+    <div
+      style={{
         width: '80%',
         maxWidth: '400px',
-        height: '200px',
+        height: 'auto',
         color: 'black',
         position: 'absolute',
         top: '50%',
@@ -31,10 +52,16 @@ function FooterRight({ likes, saves, profilePic }) {
         borderRadius: '10px',
         padding: '20px',
         textAlign: 'center',
-      }} className="cart-page">
-        <h2>Cart</h2>
-        <p>here it will show the products and from which restaurant with prices</p>
-        <FontAwesomeIcon
+      }}
+      className="cart-page"
+    >
+      <h2>Cart</h2>
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        cartItems.map((item, index) => <p key={index}>{item}</p>)
+      )}
+      <FontAwesomeIcon
         icon={faTimes}
         style={{
           position: 'absolute',
@@ -42,20 +69,31 @@ function FooterRight({ likes, saves, profilePic }) {
           right: '10px',
           cursor: 'pointer',
           color: 'red',
-          fontSize: '18px'
+          fontSize: '18px',
         }}
-        onClick={() => setCartPage(false)}
+        onClick={handleCloseCart}
       />
-      </div>
-    );
-  }
-  function InfoPage() {
-    return (
-      <div style={{ width: '100%', height: '100px', color: 'black', position: "absolute", bottom: "15%", left: "0", backgroundColor: "white" ,boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-        borderRadius: '10px',}} className="info-page">
-        <h2>Info Page</h2>
-        <p>This is the content of your info page.</p>
-        <FontAwesomeIcon
+    </div>
+  );
+
+  const InfoPage = () => (
+    <div
+      style={{
+        width: '100%',
+        height: '100px',
+        color: 'black',
+        position: 'absolute',
+        bottom: '15%',
+        left: '0',
+        backgroundColor: 'white',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        borderRadius: '10px',
+      }}
+      className="info-page"
+    >
+      <h2>Info Page</h2>
+      <p>This is the content of your info page.</p>
+      <FontAwesomeIcon
         icon={faTimes}
         style={{
           position: 'absolute',
@@ -63,19 +101,12 @@ function FooterRight({ likes, saves, profilePic }) {
           right: '10px',
           cursor: 'pointer',
           color: 'red',
-          fontSize: '18px'
+          fontSize: '18px',
         }}
         onClick={() => setShowInfoPage(false)}
       />
-      </div>
-    );
-  }
-   const handleCartClick =() =>{
-    setCartPage(true);
-   }
-  const handleIconClick = () => {
-    setShowInfoPage(true);
-  };
+    </div>
+  );
 
   const parseLikesCount = (count) => {
     if (typeof count === 'string') {
@@ -101,11 +132,22 @@ function FooterRight({ likes, saves, profilePic }) {
   return (
     <div className="footer-right">
       <div className="sidebar-icon">
-        {profilePic ? (
-          <img src={profilePic} className='userprofile' alt='Profile' style={{ width: '45px', height: '45px', color: '#616161' }} />
-        ) : null}
-        <FontAwesomeIcon icon={userAddIcon} className='useradd' style={{ width: '15px', height: '15px', color: '#FF0000' }} onClick={handleUserAddClick} />
+        {profilePic && (
+          <img
+            src={profilePic}
+            className="userprofile"
+            alt="Profile"
+            style={{ width: '45px', height: '45px', color: '#616161' }}
+          />
+        )}
+        <FontAwesomeIcon
+          icon={plusIcon}
+          className="useradd"
+          style={{ width: '15px', height: '15px', color: '#FF0000' }}
+          onClick={handleUserAddClick}
+        />
       </div>
+
       <div className="sidebar-icon">
         <FontAwesomeIcon
           icon={faHeart}
@@ -114,19 +156,25 @@ function FooterRight({ likes, saves, profilePic }) {
         />
         <p>{formatLikesCount(parseLikesCount(likes) + (liked ? 1 : 0))}</p>
       </div>
+
       <div className="sidebar-icon">
-        {/* this is the information section  */}
         <FontAwesomeIcon
           icon={faInfoCircle}
           style={{ width: '35px', height: '35px', color: 'white' }}
-          onClick={handleIconClick}
+          onClick={() => setShowInfoPage(true)}
         />
         {showInfoPage && InfoPage()}
       </div>
+
       <div className="sidebar-icon">
-        {saved ? (
+      <FontAwesomeIcon
+            icon={faPlus}
+            style={{ width: '35px', height: '35px', color: '#ffc107' }}
+          // onClick={HandleAdding}
+          />
+        {/* {saved ? (
           <FontAwesomeIcon
-            icon={faBookmark}
+            icon={faPlus}
             style={{ width: '35px', height: '35px', color: '#ffc107' }}
             onClick={() => setSaved(false)}
           />
@@ -136,18 +184,26 @@ function FooterRight({ likes, saves, profilePic }) {
             style={{ width: '35px', height: '35px', color: 'white' }}
             onClick={() => setSaved(true)}
           />
-        )}
-        <p>{saved ? saves + 1 : saves}</p>
+        )} */}
+      
       </div>
-      {/* this is the new cart section   */}
+
       <div className="sidebar-icon">
-        <FontAwesomeIcon icon={faCartShopping} style={{ width: '35px', height: '35px', color: 'white' }} 
-        onClick={handleCartClick}/>
-        <p>cart</p>
+        <FontAwesomeIcon
+          icon={faCartShopping}
+          style={{ width: '35px', height: '35px', color: 'white' }}
+          onClick={handleAddToCart}
+        />
+        <p>Cart</p>
       </div>
+
       {showCartPage && CartPage()}
+
       <div className="sidebar-icon record">
-        <img src="https://static.thenounproject.com/png/934821-200.png" alt='Record Icon' />
+        <img
+          src="https://static.thenounproject.com/png/934821-200.png"
+          alt="Record Icon"
+        />
       </div>
     </div>
   );
