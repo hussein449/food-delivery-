@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faCircleCheck, faHeart, faPlus, faCartShopping, faInfoCircle, faTimes} from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faCircleCheck, faHeart, faPlus, faCartShopping, faInfoCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './FooterRight.css';
-
-function FooterRight({ likes,  profilePic, productDescription }) {
+import { CartContext } from '../CartContext';
+function FooterRight({ likes, profilePic, productDescription }) {
+  const {handleUpdateCart, cartItems}=useContext(CartContext);
   const [liked, setLiked] = useState(false);
   const [plusIcon, setPlusIcon] = useState(faCirclePlus);
   const [showInfoPage, setShowInfoPage] = useState(false);
   const [showCartPage, setCartPage] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
- 
+
+
+  
+  const HandleAdding = () => {
+    if (productDescription) {
+      console.log('Product Description:', productDescription);
+      handleUpdateCart(productDescription);
+    
+    }
+  };
 
   const handleUserAddClick = () => {
     setPlusIcon(faCircleCheck);
@@ -18,17 +27,7 @@ function FooterRight({ likes,  profilePic, productDescription }) {
     }, 3000);
   };
 
-  // const HandleAdding = () => {
-  //   if (productDescription) {
-  //     console.log("Product Description:", productDescription);
-  //   } else {
-  //     console.log("No description available.");
-  //   }
-  // }
   const handleAddToCart = () => {
-    if (productDescription) {
-      setCartItems((prevItems) => [...prevItems, productDescription]);
-    }
     setCartPage(true);
   };
 
@@ -59,7 +58,11 @@ function FooterRight({ likes,  profilePic, productDescription }) {
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        cartItems.map((item, index) => <p key={index}>{item}</p>)
+        <ul>
+          {cartItems.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
       )}
       <FontAwesomeIcon
         icon={faTimes}
@@ -167,25 +170,11 @@ function FooterRight({ likes,  profilePic, productDescription }) {
       </div>
 
       <div className="sidebar-icon">
-      <FontAwesomeIcon
-            icon={faPlus}
-            style={{ width: '35px', height: '35px', color: '#ffc107' }}
-          // onClick={HandleAdding}
-          />
-        {/* {saved ? (
-          <FontAwesomeIcon
-            icon={faPlus}
-            style={{ width: '35px', height: '35px', color: '#ffc107' }}
-            onClick={() => setSaved(false)}
-          />
-        ) : (
-          <FontAwesomeIcon
-            icon={faBookmark}
-            style={{ width: '35px', height: '35px', color: 'white' }}
-            onClick={() => setSaved(true)}
-          />
-        )} */}
-      
+        <FontAwesomeIcon
+          icon={faPlus}
+          style={{ width: '35px', height: '35px', color: '#ffc107' }}
+          onClick={HandleAdding}
+        />
       </div>
 
       <div className="sidebar-icon">

@@ -41,7 +41,14 @@ const VideoCard = (props) => {
         </div>
         <div className="footer-right">
           {/* The right part of the container */}
-          <FooterRight likes={likes} shares={shares} comments={comments} saves={saves} profilePic={profilePic} />
+          <FooterRight 
+  likes={likes} 
+  shares={shares} 
+  comments={comments} 
+  saves={saves} 
+  profilePic={profilePic} 
+  productDescription={description} 
+/>
         </div>
       </div>
     </div>
