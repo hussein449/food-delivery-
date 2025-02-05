@@ -6,6 +6,8 @@ import TopNavbar from './components/TopNavbar';
 import { Routes, Route } from 'react-router-dom';
 import Categories from './Categories';
 import {  CartProvider } from './CartContext';
+import Home from './Home';
+import CartPage from './CartPage';
 // This array holds information about different videos
 const videoUrls = [
   {
@@ -104,14 +106,18 @@ function App() {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<div>Home Page Content</div>} />
+        <Route path="/Home" element={<div>Home Page Content</div>} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/CartPage" element={<CartPage />} />
+        {/* <Route path="/Cart" element={<Cart/>} /> */}
       </Routes>
       <div className="container">
 
         <TopNavbar className="top-navbar" />
         {/* Here we map over the videos array and create VideoCard components */}
            <CartProvider>
+           <CartPage/>
         {videos.map((video, index) => (
 
           <VideoCard
@@ -129,7 +135,9 @@ function App() {
             autoplay={index === 0}
             
           />
+        
         ))}
+         
         </CartProvider>
         <BottomNavbar className="bottom-navbar" />
       </div>

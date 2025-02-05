@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Categories() {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
-  // State to store selected food categories
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const foodCategories = [
@@ -20,15 +19,15 @@ function Categories() {
   const handleCheckboxChange = (category) => {
     setSelectedCategories((prevState) => {
       if (prevState.includes(category)) {
-        return prevState.filter((item) => item !== category); // Uncheck category
+        return prevState.filter((item) => item !== category);
       } else {
-        return [...prevState, category]; // Check category
+        return [...prevState, category];
       }
     });
   };
 
   const goBack = () => {
-    navigate('/'); // Navigate back to the home page
+    navigate('/Home');
   };
 
   return (
@@ -38,11 +37,11 @@ function Categories() {
         Go Back
       </button>
 
-      <h1 style={styles.heading}>Categories Page</h1>
-      <p style={styles.text}>Welcome to the categories page!</p>
+      <h1 style={styles.heading}>Food Categories</h1>
+      <p style={styles.text}>Select the food categories you're interested in</p>
 
       <div style={styles.checkboxContainer}>
-        <h2 style={styles.checkboxHeading}>Select Food Categories:</h2>
+        <h2 style={styles.checkboxHeading}>Choose your favorites:</h2>
         {foodCategories.map((category, index) => (
           <div key={index} style={styles.checkboxItem}>
             <input
@@ -62,68 +61,94 @@ function Categories() {
   );
 }
 
-// Inline styles
 const styles = {
   container: {
-    backgroundColor: 'white',
-    padding: '20px',
+    backgroundColor: '#f7f7f7',
+    padding: '30px',
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+    transition: 'all 0.3s ease',
   },
   button: {
-    padding: '10px 20px',
-    marginBottom: '20px',
-    backgroundColor: '#007bff',
+    padding: '12px 24px',
+    marginBottom: '30px',
+    backgroundColor: '#4CAF50',
     color: 'white',
     border: 'none',
-    borderRadius: '5px',
+    borderRadius: '50px',
     cursor: 'pointer',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'all 0.3s ease',
+  },
+  buttonHover: {
+    backgroundColor: '#45a049',
   },
   heading: {
-    fontSize: '2rem',
+    fontSize: '2.5rem',
     margin: '20px 0',
+    color: '#333',
+    fontWeight: '700',
+    textAlign: 'center',
   },
   text: {
     fontSize: '1.2rem',
-    color: '#555',
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: '30px',
   },
   checkboxContainer: {
-    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    maxWidth: '400px',
   },
   checkboxHeading: {
-    fontSize: '1.5rem',
-    marginBottom: '10px',
+    fontSize: '1.6rem',
+    marginBottom: '15px',
+    color: '#333',
+    fontWeight: '600',
   },
   checkboxItem: {
-    marginBottom: '10px',
     display: 'flex',
     alignItems: 'center',
+    marginBottom: '12px',
+    transition: 'all 0.2s ease',
   },
   checkbox: {
-    marginRight: '10px',
+    marginRight: '12px',
+    cursor: 'pointer',
+    width: '20px',
+    height: '20px',
+    accentColor: '#4CAF50',
+    transition: 'all 0.2s ease',
   },
   checkboxLabel: {
-    fontSize: '1rem',
-    color: '#333',
+    fontSize: '1.2rem',
+    color: '#444',
+    cursor: 'pointer',
+    transition: 'color 0.2s ease',
+  },
+  checkboxLabelHover: {
+    color: '#4CAF50',
   },
 };
 
-// Responsive styling for smaller screens
+// Adding responsiveness
 if (window.innerWidth <= 600) {
-  styles.container.padding = '10px';
+  styles.container.padding = '15px';
   styles.button = {
     ...styles.button,
     width: '100%',
-    padding: '12px 20px',
+    padding: '14px 28px',
+    fontSize: '1rem',
   };
-  styles.checkboxHeading = {
-    fontSize: '1.2rem',
-  };
-  styles.checkboxItem = {
-    marginBottom: '8px',
-  };
+  styles.heading.fontSize = '2rem';
+  styles.text.fontSize = '1rem';
+  styles.checkboxItem.marginBottom = '8px';
+  styles.checkboxHeading.fontSize = '1.4rem';
 }
 
 export default Categories;

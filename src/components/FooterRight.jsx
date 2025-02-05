@@ -4,10 +4,12 @@ import { faCirclePlus, faCircleCheck, faHeart, faPlus, faCartShopping, faInfoCir
 import './FooterRight.css';
 import { CartContext } from '../CartContext';
 function FooterRight({ likes, profilePic, productDescription }) {
-  const {handleUpdateCart, cartItems}=useContext(CartContext);
+    // this isd to remove 
+     const {handleUpdateCart, cartItems}=useContext(CartContext);
   const [liked, setLiked] = useState(false);
   const [plusIcon, setPlusIcon] = useState(faCirclePlus);
   const [showInfoPage, setShowInfoPage] = useState(false);
+  //2
   const [showCartPage, setCartPage] = useState(false);
 
 
@@ -26,7 +28,7 @@ function FooterRight({ likes, profilePic, productDescription }) {
       setPlusIcon(faCirclePlus);
     }, 3000);
   };
-
+//3
   const handleAddToCart = () => {
     setCartPage(true);
   };
@@ -34,7 +36,7 @@ function FooterRight({ likes, profilePic, productDescription }) {
   const handleCloseCart = () => {
     setCartPage(false);
   };
-
+//4
   const CartPage = () => (
     <div
       style={{
@@ -78,7 +80,7 @@ function FooterRight({ likes, profilePic, productDescription }) {
       />
     </div>
   );
-
+//4
   const InfoPage = () => (
     <div
       style={{
@@ -176,7 +178,7 @@ function FooterRight({ likes, profilePic, productDescription }) {
           onClick={HandleAdding}
         />
       </div>
-
+{/* 5 */}
       <div className="sidebar-icon">
         <FontAwesomeIcon
           icon={faCartShopping}
@@ -198,4 +200,4 @@ function FooterRight({ likes, profilePic, productDescription }) {
   );
 }
 
-export default FooterRight;
+export default FooterRight; 
