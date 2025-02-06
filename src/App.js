@@ -8,9 +8,8 @@ import Categories from './Categories';
 import {  CartProvider } from './CartContext';
 import Home from './Home';
 import CartPage from './CartPage';
-import RestaurantSignup from "../src/RestaurantSignup"; 
-//import RestaurantSignup from './restaurantSignup';
-
+import RestaurantSignUp from "./RestaurantSignUp"; // Adjust the path if needed
+import ProfilePage from "./ProfilePage";
 // This array holds information about different videos
 const videoUrls = [
   {
@@ -109,12 +108,13 @@ function App() {
   return (
     <div className="app">
       <Routes>
+      
         <Route path="/Home" element={<div>Home Page Content</div>} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/" element={<Home/>} />
         <Route path="/CartPage" element={<CartPage />} />
-        <Route path="/signup" element={<RestaurantSignup/>} />
-        {/* <Route path="/RestaurantSignup" element={<RestaurantSignup />} /> */}
+        <Route path="/Signup" element={< RestaurantSignUp/>} />
+        <Route path="/profile" element={<ProfilePage />} />
         
       </Routes>
       <div className="container">

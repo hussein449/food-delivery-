@@ -29,7 +29,7 @@ function BottomNavbar() {
           <span className="item-name">Cart</span>
           </Link>
         {/* </div> */}
-        <Link to="/" className="nav-item">
+        <Link to="/profile" className="nav-item">
           <FontAwesomeIcon icon={faUser} className="icon" />
           <span className="item-name">Profile</span>
         </Link>

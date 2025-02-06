@@ -21,7 +21,7 @@ function LoginPage() {
           
           <button 
             className="signup-btn"
-            onClick={() => navigate('/restaurantSignup')}
+            onClick={() => navigate('/Signup')}
           >
             Restaurant Signup
           </button>

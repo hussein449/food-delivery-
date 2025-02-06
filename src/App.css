@@ -7,6 +7,36 @@ html {
   font-family: 'Montserrat', sans-serif;
   background-color: #000;
 }
+/* Add this to the global or App-level CSS file */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#root {
+  height: 100%;
+}
+
+/* Ensure the profile container takes full height */
+.profile-container {
+  min-height: 100vh; /* Make sure it takes full height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #fff;
+}
+
+/* For general container styling */
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
 .app {
   height: 100vh;
